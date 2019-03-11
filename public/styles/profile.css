@@ -1,0 +1,33 @@
+.profile {
+    background-image: url('/public/img/profile.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.fa-user-circle {
+    background: -webkit-gradient(linear, left top, left bottom, from(#0a0c09), color-stop(20%, #1f381b), color-stop(20%, transparent), color-stop(40%, transparent), color-stop(40%, #417d19), color-stop(60%, #74a82a), color-stop(60%, transparent), color-stop(80%, #98B296), to(#98B296));
+    background: -webkit-gradient(linear, left top, left bottom, from(#0a0c09), color-stop(20%, #0a0c09),color-stop(40%, #1f381b), color-stop(60%, #336701), color-stop(80%, #74a82a), to(#cde745));
+    background: -webkit-linear-gradient(top, #0a0c09, #0a0c09 20%,#1f381b 40%, #336701 60%, #74a82a 80%, #cde745 100%);
+    background: -o-linear-gradient(top, #0a0c09, #0a0c09 20%,#1f381b 40%, #336701 60%, #74a82a 80%, #cde745 100%);
+    background: linear-gradient(to bottom, #0a0c09, #0a0c09 20%,#1f381b 40%, #336701 60%, #74a82a 80%, #cde745 100%);
+    -webkit-transition: opacity 0.2s ease-out, width 0.2s 0.2s ease-out;
+    -o-transition: opacity 0.2s ease-out, width 0.2s 0.2s ease-out;
+    transition: opacity 0.2s ease-out, width 0.2s 0.2s ease-out;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.fa-user-circle:hover {
+    -webkit-text-fill-color: white;
+    cursor: pointer;
+}
+.user-image {
+    width: 20%;
+    border-radius: 50%;
+    height: 26%;
+    min-width: 144px;
+    min-height: 146px;
+    position: absolute;
+}
