@@ -5,10 +5,10 @@
             <form action="/account/profile" method="post" enctype="multipart/form-data">
                 <div class="b_user_image">
                     <div id="btn">
-                    <?php if(empty($user['image'])):?>
-                    <label class="user_image_label" for='file' id="output"><i class="far fa-user-circle fa-9x"></i><i class="far fa-edit fa-4x"></i></label>
+                    <?php if(!empty($user['image'])):?>
+                    <label class="user_image_label" for='file' id="output"><i class="far fa-user-circle fa-9x"></i></label>
                         <?php else: ?>
-                    <label class="user_image_label" for='file' id="output"><i class="fas fa-pen-fancy fa-4x"></i><img class="user-image" src="<?= $user['image'] ?>" alt=""></label>
+                    <label class="user_image_label" for='file' id="output"><img class="user-image" src="<?= $user['image'] ?>" alt=""><i class="fas fa-pen-fancy fa-4x"></i></label>
                         <?php endif; ?>
                     </div>
                     <input type="file" style="visibility:hidden;" id="file" name="image" />

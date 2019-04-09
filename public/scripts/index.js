@@ -37,8 +37,9 @@ function handleFileSelect(evt) {
         return function(e) {
             // Render thumbnail.
             var span = document.createElement('span');
-            span.innerHTML = ['<img class="user-image" title="', escape(theFile.name), '" src="', e.target.result, '" />'].join('');
-            document.getElementById('output').replaceChild(span.childNodes[0], document.getElementById('output').childNodes[0]);
+            span.innerHTML = ['<i class="fas fa-pen-fancy fa-4x" style="position: absolute"/>'].join('');
+            span.innerHTML += ['<img class="user-image" title="', escape(theFile.name), '" src="', e.target.result, '" />'].join('');
+            document.getElementById('output').replaceChild(span, document.getElementById('output').childNodes[0]);
         };
     })(f);
     // Read in the image file as a data URL.

@@ -38,20 +38,18 @@
 }
 .fa-pen-fancy
 {
-
-    opacity: 0;
+    z-index: 0;
     left: 25%;
     top: 25%;
-    position: absolute;
 }
-.user-image:hover ~ i.fa-edit
+.user_image_label:hover ~ i.fa-pen-fancy
 {
-    opacity: 1;
+    z-index: 1!important;
 }
-.fa-edit:hover {
-    opacity: 1;
-    cursor: pointer;
+.fa-pen-fancy:hover {
+
 }
+
 .user_image_label
 {
     margin-bottom: 0;
