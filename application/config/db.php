@@ -1,8 +1,8 @@
 <?php
 
 return [
-	'host' => 'mysql.zzz.com.ua',
-	'name' => 'yuriyshkvarc',
-	'user' => 'yuriyshkvarc',
-	'password' => 'Yura380971295547',
+	'host' => 'localhost',
+	'name' => 'shkvarc',
+	'user' => 'root',
+	'password' => '',
 ];

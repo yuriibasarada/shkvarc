@@ -15,9 +15,35 @@ $(document).ready(function () {
 
             setInterval(
                 () => p.remove(),
-                parseInt(p.css('--duration')) * 500
+                parseInt(p.css('--duration')) * 100
             );
         }, 1000);
     }
     preloader();
+
+
+
+// Загрузка фото в профиль
+function handleFileSelect(evt) {
+    var file = evt.target.files; // FileList object
+    var f = file[0];
+    // Only process image files.
+    if (!f.type.match('image.*')) {
+        alert("Image only please....");
+    }
+    var reader = new FileReader();
+    // Closure to capture the file information.
+    reader.onload = (function(theFile) {
+        return function(e) {
+            // Render thumbnail.
+            var span = document.createElement('span');
+            span.innerHTML = ['<img class="user-image" title="', escape(theFile.name), '" src="', e.target.result, '" />'].join('');
+            document.getElementById('output').replaceChild(span.childNodes[0], document.getElementById('output').childNodes[0]);
+        };
+    })(f);
+    // Read in the image file as a data URL.
+    reader.readAsDataURL(f);
+}
+document.getElementById('file').addEventListener('change', handleFileSelect, false);
+
 });

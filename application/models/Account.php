@@ -162,12 +162,13 @@ class Account extends Model {
 	    //Загрузка фото
 
         $uploaddir = DIR_ROOT . '/public/upload/avatar/';
+        $save_dir = '/public/upload/avatar/' . basename($files['image']['name']);
         $uploadfile = $uploaddir . basename($files['image']['name']);
         move_uploaded_file($files['image']['tmp_name'], $uploadfile);
 		$params = [
 			'id' => $_SESSION['account']['id'],
 			'email' => $post['email'],
-            'image' => $uploadfile
+            'image' => $save_dir
  		];
 		if (!empty($post['password'])) {
 			$params['password'] = password_hash($post['password'], PASSWORD_BCRYPT);
@@ -182,4 +183,9 @@ class Account extends Model {
 		$this->db->query('UPDATE accounts SET email = :email, image = :image'.$sql.' WHERE id = :id', $params);
 	}
 
+    public function getUser($id)
+    {
+        $params = ['id' => $id];
+        return $this->db->row('SELECT * FROM accounts WHERE id  = :id', $params);
+    }
 }

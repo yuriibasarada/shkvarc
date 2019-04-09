@@ -23,11 +23,36 @@
     -webkit-text-fill-color: white;
     cursor: pointer;
 }
-.user-image {
+.user-image, .user_image_label  {
     width: 20%;
     border-radius: 50%;
     height: 26%;
     min-width: 144px;
     min-height: 146px;
+    max-height: 146px;
+    position: relative;
+}
+.user-image:hover
+{
+    cursor: pointer;
+}
+.fa-pen-fancy
+{
+
+    opacity: 0;
+    left: 25%;
+    top: 25%;
     position: absolute;
+}
+.user-image:hover ~ i.fa-edit
+{
+    opacity: 1;
+}
+.fa-edit:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+.user_image_label
+{
+    margin-bottom: 0;
 }

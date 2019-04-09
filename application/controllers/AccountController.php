@@ -69,12 +69,13 @@ class AccountController extends Controller {
 				$this->view->message('error', $this->model->error);
 			}
 
-
 			$this->model->save($_POST, $_FILES);
 			$this->view->message('error', 'Сохранено');
 		}
-        $var['class'] = 'profile';
-        $this->view->render('Профиль', $var);
+		$arr = $this->model->getUser($_SESSION['account']['id']);
+        $vars = ['class' => 'profile',
+                'user' => $arr[0]];
+        $this->view->render('Профиль', $vars);
 	}
 
 	public function logoutAction() {
