@@ -41,7 +41,7 @@ class Merchant extends Model {
 	}
 
 	public function createTariff($data, $tarif) {
-		$dataRef = $this->db->column('SELECT ref FROM accounts WHERE id = :id', ['id' => $data['uid']]);
+		$dataRef = $this->db->column('SELECT ref FROM accounts WHERE accounts_id = :id', ['id' => $data['uid']]);
 		if ($dataRef === false) {
 			return false;
 		}
@@ -51,7 +51,7 @@ class Merchant extends Model {
 				'sum' => $refSum,
 				'id' => $dataRef,
 			];
-			$this->db->query('UPDATE accounts SET refBalance = refBalance + :sum WHERE id = :id', $params);
+			$this->db->query('UPDATE accounts SET refBalance = refBalance + :sum WHERE accounts_id = :id', $params);
 			$params = [
 				'id' => '',
 				'uid' => $dataRef,

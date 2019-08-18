@@ -8,7 +8,7 @@ class Account extends Model {
 
 	public function validate($input, $post) {
 		$rules = [
-            'email' => [
+            'accounts_email' => [
                 'pattern' => '#^([a-z0-9_.-]{1,20}+)@([a-z0-9_.-]+)\.([a-z\.]{2,10})$#',
                 'message' => 'E-mail адрес указан неверно',
             ],
@@ -45,16 +45,16 @@ class Account extends Model {
 
 	public function checkEmailExists($email) {
 		$params = [
-			'email' => $email,
+			'accounts_email' => $email,
 		];
-		return $this->db->column('SELECT id FROM accounts WHERE email = :email', $params);
+		return $this->db->column('SELECT accounts_id FROM accounts WHERE accounts_email = :accounts_email', $params);
 	}
 
 	public function checkLoginExists($login) {
 		$params = [
 			'login' => $login,
 		];
-		if ($this->db->column('SELECT id FROM accounts WHERE login = :login', $params)) {
+		if ($this->db->column('SELECT accounts_id FROM accounts WHERE accounts_login = :login', $params)) {
 			$this->error = 'Этот логин уже используется';
 			return false;
 		}
@@ -65,21 +65,21 @@ class Account extends Model {
 		$params = [
 			'token' => $token,
 		];
-		return $this->db->column('SELECT id FROM accounts WHERE token = :token', $params);
+		return $this->db->column('SELECT accounts_id FROM accounts WHERE accounts_token = :token', $params);
 	}
 
 	public function activate($token) {
 		$params = [
 			'token' => $token,
 		];
-		$this->db->query('UPDATE accounts SET status = 1, token = "" WHERE token = :token', $params);
+		$this->db->query('UPDATE accounts SET accounts_status_id = 1, accounts_token = "" WHERE accounts_token = :token', $params);
 	}
 
 	public function checkRefExists($login) {
 		$params = [
 			'login' => $login,
 		];
-		return $this->db->column('SELECT id FROM accounts WHERE login = :login', $params);
+		return $this->db->column('SELECT accounts_id FROM accounts WHERE accounts_login = :login', $params);
 	}
 
 	public function createToken() {
@@ -90,15 +90,16 @@ class Account extends Model {
 		$token = $this->createToken();
 		$ref = 0;
 		$params = [
-			'id' => '',
-			'email' => $post['regemail'],
-			'login' => $post['regname'],
-			'wallet' => 0,
-			'password' => password_hash($post['regpass'], PASSWORD_BCRYPT),
-			'ref' => $ref,
-			'refBalance' => 0,
-			'token' => $token,
-			'status' => 0,
+			'accounts_id' => '',
+			'accounts_email' => $post['regemail'],
+			'accounts_login' => $post['regname'],
+			'accounts_wallet' => 0,
+			'accounts_password' => password_hash($post['regpass'], PASSWORD_BCRYPT),
+			'accounts_ref' => $ref,
+			'accounts_refBalance' => 0,
+			'accounts_token' => $token,
+			'accounts_status' => 0,
+            'accounts_description' => ''
 		];
 		$this->db->query('INSERT INTO accounts VALUES (:id, :email, :login, :wallet, :password, :ref, :refBalance, :token, :status)', $params);
         @mail($post['regemail'], 'Register', 'Confirm: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/account/confirm/'.$token, 'From: yuriyshkvarc@shkvarc.zzz.com.ua' . "\r\n");
@@ -110,7 +111,7 @@ class Account extends Model {
 		$params = [
 			'login' => $login,
 		];
-		$hash = $this->db->column('SELECT password FROM accounts WHERE login = :login', $params);
+		$hash = $this->db->column('SELECT accounts_password FROM accounts WHERE accounts_login = :login', $params);
 		if (!$hash or !password_verify($password, $hash)) {
 			return false;
 		}
@@ -121,7 +122,7 @@ class Account extends Model {
 		$params = [
 			$type => $data,
 		];
-		$status = $this->db->column('SELECT status FROM accounts WHERE '.$type.' = :'.$type, $params);
+		$status = $this->db->column('SELECT accounts_status_id FROM accounts WHERE '.$type.' = :'.$type, $params);
 		if ($status != 1) {
 			$this->error = 'Аккаунт ожидает подтверждения по E-mail';
 			return false;
@@ -133,7 +134,7 @@ class Account extends Model {
 		$params = [
 			'login' => $login,
 		];
-		$data = $this->db->row('SELECT * FROM accounts WHERE login = :login', $params);
+		$data = $this->db->row('SELECT * FROM accounts WHERE accounts_login = :login', $params);
 		$_SESSION['account'] = $data[0];
 	}
 
@@ -143,7 +144,7 @@ class Account extends Model {
 			'email' => $post['email'],
 			'token' => $token,
 		];
-		$this->db->query('UPDATE accounts SET token = :token WHERE email = :email', $params);
+		$this->db->query('UPDATE accounts SET accounts_token = :token WHERE accounts_email = :email', $params);
 		mail($post['email'], 'Recovery', 'Confirm: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/account/reset/'.$token);
 	}
 
@@ -153,7 +154,7 @@ class Account extends Model {
 			'token' => $token,
 			'password' => password_hash($new_password, PASSWORD_BCRYPT),
 		];
-		$this->db->query('UPDATE accounts SET status = 1, token = "", password = :password WHERE token = :token', $params);
+		$this->db->query('UPDATE accounts SET accounts_status_id = 1, accounts_token = "", accounts_password = :password WHERE accounts_token = :token', $params);
 		return $new_password;
 	}
 
@@ -166,13 +167,14 @@ class Account extends Model {
         $uploadfile = $uploaddir . basename($files['image']['name']);
         move_uploaded_file($files['image']['tmp_name'], $uploadfile);
 		$params = [
-			'id' => $_SESSION['account']['id'],
-			'email' => $post['email'],
-            'image' => $save_dir
+			'accounts_id' => $_SESSION['account']['accounts_id'],
+			'accounts_email' => $post['accounts_email'],
+            'accounts_image' => $save_dir,
+            'accounts_description' => $post['accounts_description']
  		];
-		if (!empty($post['password'])) {
-			$params['password'] = password_hash($post['password'], PASSWORD_BCRYPT);
-			$sql = ',password = :password';
+		if (!empty($post['accounts_password'])) {
+			$params['accounts_password'] = password_hash($post['accounts_password'], PASSWORD_BCRYPT);
+			$sql = ',accounts_password = :accounts_password';
 		}
 		else {
 			$sql = '';
@@ -180,12 +182,14 @@ class Account extends Model {
 		foreach ($params as $key => $val) {
 			$_SESSION['account'][$key] = $val;
 		}
-		$this->db->query('UPDATE accounts SET email = :email, image = :image'.$sql.' WHERE id = :id', $params);
+		$this->db->query('UPDATE accounts SET accounts_email = :accounts_email, accounts_image = :accounts_image, 
+                                    accounts_description = :accounts_description' .$sql.' 
+                              WHERE accounts_id = :accounts_id', $params);
 	}
 
     public function getUser($id)
     {
         $params = ['id' => $id];
-        return $this->db->row('SELECT * FROM accounts WHERE id  = :id', $params);
+        return $this->db->row('SELECT * FROM accounts WHERE accounts_id  = :id', $params);
     }
 }

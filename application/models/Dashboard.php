@@ -27,7 +27,7 @@ class Dashboard extends Model {
 		$params = [
 			'uid' => $_SESSION['account']['id'],
 		];
-		return $this->db->column('SELECT COUNT(id) FROM accounts WHERE ref = :uid', $params);
+		return $this->db->column('SELECT COUNT(accounts_id) FROM accounts WHERE ref = :uid', $params);
 	}
 
 	public function referralsList($route) {
@@ -37,7 +37,7 @@ class Dashboard extends Model {
 			'start' => ((($route['page'] ?? 1) - 1) * $max),
 			'uid' => $_SESSION['account']['id'],
 		];
-		return $this->db->row('SELECT login, email FROM accounts WHERE ref = :uid ORDER BY id DESC LIMIT :start, :max', $params);
+		return $this->db->row('SELECT login, email FROM accounts WHERE ref = :uid ORDER BY accounts_id DESC LIMIT :start, :max', $params);
 	}
 
 	public function tariffsCount() {
@@ -64,7 +64,7 @@ class Dashboard extends Model {
 		$params = [
 			'id' => $_SESSION['account']['id'],
 		];
-		$this->db->query('UPDATE accounts SET refBalance = 0 WHERE id = :id', $params);
+		$this->db->query('UPDATE accounts SET refBalance = 0 WHERE accounts_id = :id', $params);
 
 		$params = [
 			'id' => '',

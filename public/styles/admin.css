@@ -25,11 +25,11 @@ body.fixed-nav {
   width: 50px;
   height: 50px;
   text-align: center;
-  color: white;
+  color: ghostwhite;
   background: rgba(52, 58, 64, 0.5);
   line-height: 45px; }
   .scroll-to-top:focus, .scroll-to-top:hover {
-    color: white; }
+    color: ghostwhite; }
   .scroll-to-top:hover {
     background: #343a40; }
   .scroll-to-top i {
@@ -204,7 +204,7 @@ body.sidenav-toggled #mainNav.static-top #sidenavToggler i {
 
 .content-wrapper {
   overflow-x: hidden;
-  background: white; }
+  background: ghostwhite; }
   @media (min-width: 992px) {
     .content-wrapper {
       margin-left: 250px; } }
@@ -257,10 +257,10 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav {
     background: #343a40; }
     #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a {
-      color: white !important;
+      color: ghostwhite !important;
       background-color: #495057; }
       #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a:focus, #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a:hover {
-        color: white; }
+        color: ghostwhite; }
     #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level,
     #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level {
       background: #343a40; } }

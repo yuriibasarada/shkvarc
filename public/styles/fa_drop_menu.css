@@ -208,7 +208,7 @@
     }
     .fa-info{
         opacity: 1;
-        background: white;
+        background: ghostwhite;
         -webkit-transition: opacity 0.2s ease-out, width 0.2s 0.2s ease-out;
         -o-transition: opacity 0.2s ease-out, width 0.2s 0.2s ease-out;
         transition: opacity 0.2s ease-out, width 0.2s 0.2s ease-out;
@@ -217,7 +217,7 @@
     }
     .openMenu {
         background: transparent!important;
-        color: white;
+        color: ghostwhite;
     }
 }
 .icon_block {

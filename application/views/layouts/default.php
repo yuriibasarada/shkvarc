@@ -16,6 +16,7 @@
     <script src="/public/scripts/text.js"></script>
     <script src="/public/scripts/reg_log.js"></script>
     <script src="/public/scripts/form.js"></script>
+    <script src="/public/scripts/posts.js"></script>
 </head>
 <body class='<?php echo $class ?>'>
 <button class="menu-toggle"></button>
@@ -27,7 +28,7 @@
         <a href="">
             <li data-text="Portfolio">Портфолио</li>
         </a>
-        <a href="">
+        <a href="/blog">
             <li data-text="My Blog">Блог</li>
         </a>
         <a href="">
@@ -36,7 +37,7 @@
         <a href="">
             <li data-text="Contact">Контакты</li>
         </a>
-        <?php if (isset($_SESSION['account']['id'])): ?>
+        <?php if (isset($_SESSION['account']['accounts_id'])): ?>
             <a href="/account/logout">
                 <li data-text="Logout">Выход</li>
             </a>
@@ -47,7 +48,7 @@
         <?php endif; ?>
     </ul>
 </nav>
-        <?php if (isset($_SESSION['account']['id'])): ?>
+        <?php if (isset($_SESSION['account']['accounts_id'])): ?>
             <div class="enter_div">
                 <a href="/account/profile"><i class="fab fa-wolf-pack-battalion fa-4x"></i></a>
             </div>

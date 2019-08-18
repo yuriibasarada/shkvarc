@@ -33,7 +33,7 @@ class Admin extends Model {
 				$params = [
 					'id' => $val['uid'],
 				];
-				$account = $this->db->row('SELECT login, email FROM accounts WHERE id = :id', $params)[0];
+				$account = $this->db->row('SELECT accounts_login, accounts_email FROM accounts WHERE accounts_id = :id', $params)[0];
 				$arr[$key]['login'] = $account['login'];
 				$arr[$key]['email'] = $account['email'];
 			}
@@ -50,7 +50,7 @@ class Admin extends Model {
 				$params = [
 					'id' => $val['uid'],
 				];
-				$account = $this->db->row('SELECT login, wallet FROM accounts WHERE id = :id', $params)[0];
+				$account = $this->db->row('SELECT accounts_login, wallet FROM accounts WHERE accounts_id = :id', $params)[0];
 				$arr[$key]['login'] = $account['login'];
 				$arr[$key]['wallet'] = $account['wallet'];
 			}
@@ -67,7 +67,7 @@ class Admin extends Model {
 				$params = [
 					'id' => $val['uid'],
 				];
-				$account = $this->db->row('SELECT login, wallet FROM accounts WHERE id = :id', $params)[0];
+				$account = $this->db->row('SELECT accounts_login, wallet FROM accounts WHERE accounts_id = :id', $params)[0];
 				$arr[$key]['login'] = $account['login'];
 				$arr[$key]['wallet'] = $account['wallet'];
 			}
@@ -133,7 +133,7 @@ class Admin extends Model {
 				$params = [
 					'id' => $val['uid'],
 				];
-				$account = $this->db->row('SELECT login, email FROM accounts WHERE id = :id', $params)[0];
+				$account = $this->db->row('SELECT accounts_login, email FROM accounts WHERE accounts_id = :id', $params)[0];
 				$arr[$key]['login'] = $account['login'];
 				$arr[$key]['email'] = $account['email'];
 			}

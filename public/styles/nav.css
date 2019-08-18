@@ -56,7 +56,7 @@ button.menu-toggle:before {
 button.menu-toggle:after {
     opacity: 0;
     content: '\1F541';
-    color: white;
+    color: ghostwhite;
     position: absolute;
     top: 16px;
     left: -4px;
@@ -148,7 +148,7 @@ ul.main_ul_nav {
     backface-visibility: hidden;
     -webkit-perspective: 1000;
     perspective: 1000;
-    color: white;
+    color: ghostwhite;
 }
 ul.main_ul_nav li {
     opacity: 0;
@@ -165,7 +165,7 @@ ul.main_ul_nav li:before {
     left: 0;
     margin: auto;
     left: auto;
-    background-color: white;
+    background-color: ghostwhite;
     height: 100%;
     width: 0;
     overflow: hidden;
@@ -335,7 +335,7 @@ ul.main_ul_nav li:hover:after {
     }
 }
 .main_ul_nav a{
-    color: white!important;
+    color: ghostwhite!important;
 }
 .main_ul_nav a:hover {
     text-decoration: none;

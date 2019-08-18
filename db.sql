@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(50) NOT NULL,
   `login` varchar(15) NOT NULL,
+  `description` varchar(200) NOT NULL,
   `wallet` varchar(15) NOT NULL,
   `password` varchar(200) NOT NULL,
   `ref` int(11) NOT NULL,

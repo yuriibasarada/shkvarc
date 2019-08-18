@@ -45,7 +45,7 @@ class AccountController extends Controller {
 			elseif (!$this->model->checkData($_POST['logname'], $_POST['logpass'])) {
 				$this->view->message('error', 'Логин или пароль указан неверно');
 			}
-			elseif (!$this->model->checkStatus('login', $_POST['logname'])) {
+			elseif (!$this->model->checkStatus('accounts_login', $_POST['logname'])) {
 				$this->view->message('error', $this->model->error);
 			}
 			$this->model->login($_POST['logname']);
@@ -57,22 +57,22 @@ class AccountController extends Controller {
 	// Профиль
 
 	public function profileAction() {
-		if (!empty($_POST)) {
-			if (!$this->model->validate(['email'], $_POST)) {
+        if (!empty($_POST)) {
+			if (!$this->model->validate(['accounts_email'], $_POST)) {
 				$this->view->message('error', $this->model->error);
 			}
-			$id = $this->model->checkEmailExists($_POST['email']);
-			if ($id and $id != $_SESSION['account']['id']) {
+			$id = $this->model->checkEmailExists($_POST['accounts_email']);
+			if ($id and $id != $_SESSION['account']['accounts_id']) {
 				$this->view->message('error', 'Этот E-mail уже используется');
 			}
-			if (!empty($_POST['password']) and !$this->model->validate(['password'], $_POST)) {
+			if (!empty($_POST['accounts_password']) and !$this->model->validate(['password'], $_POST)) {
 				$this->view->message('error', $this->model->error);
 			}
 
 			$this->model->save($_POST, $_FILES);
 			$this->view->message('error', 'Сохранено');
 		}
-		$arr = $this->model->getUser($_SESSION['account']['id']);
+		$arr = $this->model->getUser($_SESSION['account']['accounts_id']);
         $vars = ['class' => 'profile',
                 'user' => $arr[0]];
         $this->view->render('Профиль', $vars);

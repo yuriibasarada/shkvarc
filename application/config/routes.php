@@ -102,4 +102,15 @@ return [
 		'controller' => 'admin',
 		'action' => 'logout',
 	],
+
+
+    //OWN try
+    'blog/{page:\d+}' => [
+        'controller' => 'blog',
+        'action' => 'index'
+    ],
+    'blog' => [
+        'controller' => 'blog',
+        'action' => 'index'
+    ]
 ];

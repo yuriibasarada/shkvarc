@@ -3,26 +3,26 @@
 namespace application\lib;
 
 class Pagination {
-    
-    private $max = 10;
+    private $max = 8;
     private $route;
     private $index = '';
     private $current_page;
     private $total;
     private $limit;
 
-    public function __construct($route, $total, $limit = 10) {
+    public function __construct($route, $total, $limit = 8)
+    {
         $this->route = $route;
         $this->total = $total;
         $this->limit = $limit;
         $this->amount = $this->amount();
         $this->setCurrentPage();
     }
-   
+
     public function get() {
         $links = null;
         $limits = $this->limits();
-        $html = '<nav><ul class="pagination">';
+        $html = '<ul class="pagination">';
         for ($page = $limits[0]; $page <= $limits[1]; $page++) {
             if ($page == $this->current_page) {
                 $links .= '<li class="page-item active"><span class="page-link">'.$page.'</span></li>';
@@ -38,7 +38,7 @@ class Pagination {
                 $links .= $this->generateHtml($this->amount, 'Назад');
             }
         }
-        $html .= $links.' </ul></nav>';
+        $html .= $links.' </ul>';
         return $html;
     }
 
@@ -46,7 +46,14 @@ class Pagination {
         if (!$text) {
             $text = $page;
         }
-        return '<li class="page-item"><a class="page-link" href="/'.$this->route['controller'].'/'.$this->route['action'].'/'.$page.'">'.$text.'</a></li>';
+        if($this->route['action'] == 'index')
+        {
+            $action = '';
+        } else {
+            $action = '/'.$this->route['action'];
+        }
+        return '<li class="page-item"><a class="page-link"
+        href="/'.$this->route['controller'].$action.'/'.$page.'">'.$text.'</a></li>';
     }
 
     private function limits() {
